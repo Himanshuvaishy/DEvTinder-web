@@ -9,34 +9,45 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
 const [email,setEmail]=useState("damini@gmail.com");
 const [password,setPassword]=useState("Damini@1234");
+const [errorMessage,setErrorMessage]=useState("");
  const dispatch=useDispatch();
  const navigate=useNavigate();
 
 
-const handleLogin= async ()=>{
-    
-try{
- const res = await  axios.post(BASE_URL+"/login",
-        {
-            email,
-            password
+ const handleLogin = async () => {
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/login`,
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
-        },
-        {
-           withCredentials:true 
-        }
-     );
-     console.log(res.data.photoUrl);
-     dispatch(addUser(res.data));
-     navigate("/");
-     
-     
+    if (res.status === 200) {
+      // Login successful
+      dispatch(addUser(res.data));
+      navigate("/");
+    }
+  } catch (err) {
+    // Handle error based on the status code
+    const errorResponse = err.response;
 
-    }catch(err){
-        console.log(err);
+    if (errorResponse && errorResponse.status === 401) {
+      setErrorMessage("Invalid email or password. Please try again.");
+    } else if (errorResponse && errorResponse.status === 500) {
+      setErrorMessage("Server error. Please try again later.");
+    } else {
+      setErrorMessage("Something went wrong. Please try again.");
     }
 
-}
+    console.error(err);
+  }
+};
+
 
 
 
@@ -71,6 +82,9 @@ try{
             />
           </div>
           <div className="mt-6">
+          {errorMessage && (
+          <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
+        )}
             <button onClick={handleLogin} className="btn btn-primary w-full">Login</button>
           </div>
         </div>
