@@ -21,7 +21,7 @@ const NavBar = () => {
 
    
   return (
-    <div className="navbar top-0 left-0 w-full bg-gray-800 text-white z-50">
+    <div className="navbar fixed  top-0 left-0 w-full bg-gray-800 text-white z-50">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">👨‍💻 DevTinder</Link>
       </div>
@@ -52,7 +52,10 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <a>Settings</a>
+              <Link to="connections">Connections</Link>
+            </li>
+            <li>
+              <Link to="requests">Request</Link>
             </li>
             <li>
               <Link onClick={handleLogout}>Logout</Link>
