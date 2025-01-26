@@ -33,16 +33,23 @@ const Requests = () => {
   }, []);
 
   if (loading) {
-    return <h1 className="mt-20 flex justify-center">Loading...</h1>;
+    return (
+      <div className="mt-20 flex justify-center items-center">
+        <h1 className="text-xl font-semibold text-gray-600">Loading...</h1>
+      </div>
+    );
   }
-
-  // Check if connections is null or an empty array
+  
+  // Check if request is null or an empty array
   if (request === null || request.length === 0) {
-    return  <div className="flex flex-col items-center justify-center mt-20">
-    <h1 className="text-2xl font-semibold text-gray-700">No new Request found</h1>
-   
-  </div>
+    return (
+      <div className="flex flex-col items-center justify-center mt-20">
+        <h1 className="text-2xl font-semibold text-gray-700">No new requests found</h1>
+        <p className="text-gray-500 mt-2">You currently have no pending connection requests.</p>
+      </div>
+    );
   }
+  
 
   return (
     <div className="text-center my-10">

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
@@ -7,6 +7,7 @@ import UserCard from "./userCard";
 
 const Feed = () => {
   const dispatch = useDispatch();
+   const [loading, setLoading] = useState(true);
   const feed = useSelector((store) => store.feed);
   console.log(feed);
 
@@ -17,6 +18,8 @@ const Feed = () => {
       dispatch(addFeed(res.data));
     } catch (err) {
       console.log(err);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -24,7 +27,13 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  if (!feed) return;
+  if (loading) {
+    return (
+      <div className="mt-20 flex justify-center items-center">
+        <h1 className="text-xl font-semibold text-gray-600">Loading...</h1>
+      </div>
+    );
+  }
 
   if (feed.length <= 0)
     return (
