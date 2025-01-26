@@ -8,8 +8,9 @@ const feedSlice = createSlice({
     addFeed: (state, action) => {
       return action.payload || []; // Set to the payload or empty array if invalid
     },
-    removeFeed: () => {
-      return []; // Reset feed to an empty array
+    removeFeed: (state,action) => {
+      const newFeed = state.filter((user)=>user._id != action.payload);
+      return newFeed
     }
   }
 });

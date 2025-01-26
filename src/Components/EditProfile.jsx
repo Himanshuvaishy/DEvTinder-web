@@ -4,10 +4,19 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import ProfileUserCard from "./ProfileUserCard";
 
-const InputField = ({ label, value, onChange, type = "text", placeholder = "" }) => (
+const InputField = ({
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder = "",
+}) => (
   <div className="mb-1">
-    <label className="block text-gray-700 text-sm font-medium mb-0.5">{label}</label>
+    <label className="block text-gray-700 text-sm font-medium mb-0.5">
+      {label}
+    </label>
     <input
       type={type}
       value={value}
@@ -57,19 +66,43 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex gap-6">
+      <div className="flex gap-4">
         {/* Edit Profile Form */}
-        <div className="w-full max-w-md p-3 bg-white shadow-lg rounded-lg flex-1">
-          <h2 className="text-lg font-bold text-center text-gray-800 mb-2">Edit Profile</h2>
+        <div className="w-full max-w-sm p-2 bg-white shadow-md rounded-md flex-1">
+          <h2 className="text-base font-semibold text-center text-gray-800 mb-1">
+            Edit Profile
+          </h2>
           <div className="form-control">
-            <InputField label="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-            <InputField label="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-            <InputField label="Age" value={age} onChange={(e) => setAge(e.target.value)} />
-            <InputField label="Gender" value={gender} onChange={(e) => setGender(e.target.value)} />
-            <InputField label="Photo URL" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
+            <InputField
+              label="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <InputField
+              label="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <InputField
+              label="Age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+            <InputField
+              label="Gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            <InputField
+              label="Photo URL"
+              value={photoUrl}
+              onChange={(e) => setPhotoUrl(e.target.value)}
+            />
 
             <div className="mb-1">
-              <label className="block text-gray-700 text-sm font-medium mb-0.5">About</label>
+              <label className="block text-gray-700 text-sm font-medium mb-0.5">
+                About
+              </label>
               <textarea
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
@@ -79,23 +112,32 @@ const EditProfile = ({ user }) => {
               ></textarea>
             </div>
 
-            <button className="btn btn-primary w-full" onClick={saveProfile}>Save Profile</button>
+            <button className="btn btn-primary w-full text-sm" onClick={saveProfile}>
+              Save Profile
+            </button>
           </div>
         </div>
 
         {/* User Card */}
-        <UserCard user={{ firstName, lastName, age, gender, about, photoUrl }} className="w-full max-w-md p-3 bg-white shadow-lg rounded-lg flex-1" />
+        <ProfileUserCard
+          user={{ firstName, lastName, age, gender, about, photoUrl }}
+          className="w-full max-w-sm p-2 bg-white shadow-md rounded-md flex-1"
+        />
       </div>
 
       {/* Toasts */}
       {showToast && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-green-500 text-white p-4 rounded shadow-lg">Profile saved successfully</div>
+          <div className="bg-green-500 text-white p-4 rounded shadow-lg">
+            Profile saved successfully
+          </div>
         </div>
       )}
       {showErrorToast && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-red-500 text-white p-4 rounded shadow-lg">{error || "An error occurred"}</div>
+          <div className="bg-red-500 text-white p-4 rounded shadow-lg">
+            {error || "An error occurred"}
+          </div>
         </div>
       )}
     </>

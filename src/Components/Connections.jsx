@@ -46,9 +46,7 @@ const Connections = () => {
       <h1 className="text-bold text-3xl">Connections</h1>
 
       {connections.map((connection) => {
-       return  <ConnectionCard key={connection._id} connection={connection}/>
-
-        
+        return <ConnectionCard key={connection._id} connection={connection} />;
       })}
     </div>
   );

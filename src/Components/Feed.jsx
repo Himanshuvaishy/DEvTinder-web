@@ -11,22 +11,35 @@ const Feed = () => {
   console.log(feed);
 
   const getFeed = async () => {
-    const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
-       console.log(res);
-
-    dispatch(addFeed(res.data));
+    try {
+      const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
+      console.log(res);
+      dispatch(addFeed(res.data));
+    } catch (err) {
+      console.log(err);
+    }
   };
- 
-  
 
   useEffect(() => {
     getFeed();
   }, []);
 
-  return feed.length>0 && (
-    <div className=" mt-24 flex justify-center">
-      <UserCard user={feed[0]} />
-    </div>
+  if (!feed) return;
+
+  if (feed.length <= 0)
+    return (
+      <div className="flex flex-col items-center justify-center mt-20">
+        <h1 className="text-2xl font-semibold text-gray-700">No new users found</h1>
+        <p className="text-gray-500 mt-2">Try refreshing the page or check back later.</p>
+      </div>
+    );
+
+  return (
+    feed.length > 0 && (
+      <div className="mt-24 flex justify-center">
+        <UserCard user={feed[0]} />
+      </div>
+    )
   );
 };
 
