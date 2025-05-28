@@ -6,6 +6,9 @@ import { removeFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
   const dispatch = useDispatch();
+  const imgSrc = user.photoUrl?.includes("localhost")
+  ? user.photoUrl.replace("http://localhost:7777", "https://devtinder-a3l5.onrender.com")
+  : user.photoUrl;
 
   const handleSendReuest = async (status, userId) => {
     try {
@@ -23,7 +26,7 @@ const UserCard = ({ user }) => {
     <div className="card card-compact bg-base-100 w-96 h-auto shadow-xl">
       <figure>
         <img
-          src={user.photoUrl}
+          src={imgSrc }
           className="w-full h-64 object-cover " // Adjust the size of the image here
         />
       </figure>
