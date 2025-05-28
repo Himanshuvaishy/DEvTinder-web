@@ -1,6 +1,8 @@
 import React from "react";
 
 const ProfileUserCard = ({ user }) => {
+
+  
   return (
     <div className="card card-compact bg-base-100 w-96 h-auto shadow-xl">
       <figure>

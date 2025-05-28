@@ -33,7 +33,7 @@ const EditProfile = ({ user }) => {
   const [age, setAge] = useState(user.age || 18);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
   const [about, setAbout] = useState(user.about);
-  const [gender, setGender] = useState(user.gender || "M");
+  const [gender, setGender] = useState(user.gender || "male");
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [error, setError] = useState("");
