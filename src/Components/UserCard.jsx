@@ -6,7 +6,6 @@ import { removeFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
   const dispatch = useDispatch();
-  
 
   const handleSendReuest = async (status, userId) => {
     try {
@@ -25,9 +24,11 @@ const UserCard = ({ user }) => {
       <figure>
         <img
           src={user.photoUrl}
-          className="w-full h-64 object-cover " // Adjust the size of the image here
+          className="w-full h-64 object-cover object-top"
+          alt={`${user.firstName} ${user.lastName}`}
         />
       </figure>
+
       <div className="card-body">
         <h2 className="card-title">
           {user.firstName} {user.lastName}

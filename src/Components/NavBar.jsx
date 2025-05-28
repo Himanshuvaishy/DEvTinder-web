@@ -33,9 +33,14 @@ const NavBar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full">
-                <img alt="User photo" src={userDetail.photoUrl} />
-              </div>
+              <div className="w-10 h-10 rounded-full overflow-hidden">
+  <img
+    alt="User photo"
+    src={userDetail.photoUrl}
+    className="w-full h-full object-cover object-top"
+  />
+</div>
+
             </div>
             <ul
               tabIndex={0}
